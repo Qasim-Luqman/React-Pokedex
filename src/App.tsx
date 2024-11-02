@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import PokemonList from './components/PokemonList';
 import PokemonDetail from './components/PokemonDetail';
-import './App.css';
+import styles from './App.module.css';
 
 function App() {
   const [selectedPokemonId, setSelectedPokemonId] = useState<string | null>(null);
 
   return (
-    <div className="App">
-      <div style={{ display: 'flex', gap: '2rem', padding: '2rem' }}>
-        <PokemonList onSelectPokemon={setSelectedPokemonId} />
+    <div className={styles.container}>
+      <h1 className={styles.title}>Pokedex</h1>
+      <div className={styles.content}>
+        <PokemonList 
+          onSelectPokemon={setSelectedPokemonId} 
+          selectedPokemonId={selectedPokemonId}
+        />
         {selectedPokemonId && (
           <PokemonDetail pokemonId={selectedPokemonId} />
         )}

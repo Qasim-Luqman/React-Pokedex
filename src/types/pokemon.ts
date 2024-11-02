@@ -1,3 +1,5 @@
+import { PokemonType } from './pokemonTypes';
+
 export interface PokemonListResponse {
     count: number;
     next: string | null;
@@ -18,7 +20,7 @@ export interface PokemonDetail {
     };
     types: {
         type: {
-            name: string;
+            name: PokemonType;
         };
     }[];
 }
