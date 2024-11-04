@@ -11,6 +11,8 @@
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.5rem;
+    background-color: #f6e652;
+    border-radius: 6px;
 }
 
 .list {

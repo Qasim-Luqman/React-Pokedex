@@ -1,15 +1,17 @@
-import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { useGetPokemonByIdQuery } from '../../services/pokemonApi';
-import { typeColors, PokemonType } from '../../types/pokemonTypes';
+import { RootState } from '../../store/store';
+import { PokemonType, typeColors } from '../../types/pokemonTypes';
 import styles from './PokemonDetail.module.css';
 
-interface PokemonDetailProps {
-  pokemonId: string;
-}
+const PokemonDetail = () => {
+  const selectedPokemonId = useSelector((state: RootState) => state.pokemon.selectedPokemonId);
+  const { data: pokemonDetail, isLoading } = useGetPokemonByIdQuery(
+    selectedPokemonId ?? 'skip',
+    { skip: !selectedPokemonId }
+  );
 
-const PokemonDetail: FC<PokemonDetailProps> = ({ pokemonId }) => {
-  const { data: pokemonDetail, isLoading } = useGetPokemonByIdQuery(pokemonId);
-
+  if (!selectedPokemonId) return null;
   if (isLoading) return <div className={styles.loading}>Loading details...</div>;
   if (!pokemonDetail) return null;
 
